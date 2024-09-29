@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Availability Results</title>
+    <link rel="stylesheet" href="transaction-search-results.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Transactions - Book Availability Results</h1>
+
+        <table class="availability-table">
+            <thead>
+                <tr>
+                    <th>Book Name</th>
+                    <th>Author Name</th>
+                    <th>Serial Number</th>
+                    <th>Available</th>
+                    <th>Select to Issue</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example Rows - Replace with dynamic rows from database or logic -->
+                <tr>
+                    <td>Book 1</td>
+                    <td>Author 1</td>
+                    <td>12345</td>
+                    <td>Y</td>
+                    <td><input type="radio" name="issueBook"></td>
+                </tr>
+                <tr>
+                    <td>Book 2</td>
+                    <td>Author 2</td>
+                    <td>67890</td>
+                    <td>N</td>
+                    <td><input type="radio" name="issueBook" disabled></td>
+                </tr>
+                <!-- More rows can be added dynamically based on search -->
+            </tbody>
+        </table>
+
+        <!-- Button Container in the middle of the page -->
+        <div class="middle-buttons">
+            <button class="cancel-btn" onclick="cancelAction()">Cancel</button>
+            <button class="search-btn" onclick="searchAction()">Search</button>
+        </div>
+
+        <!-- Home and Log Out Buttons -->
+        <button class="home-btn" onclick="redirectHome()">Home</button>
+        <button class="logout-btn" onclick="logout()">Log Out</button>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back(); // Go back to the previous page
+        }
+
+        function redirectHome() {
+            const userType = sessionStorage.getItem('userType'); // Retrieve stored login type
+            if (userType === 'admin') {
+                window.location.href = 'admin-dashboard.html'; // Admin home page
+            } else {
+                window.location.href = 'user-dashboard.html'; // User home page
+            }
+        }
+
+        function logout() {
+            sessionStorage.clear(); // Clear session data
+            window.location.href = 'index.html'; // Redirect to login page
+        }
+
+        function cancelAction() {
+            // Action for cancel button, e.g., redirect or reset
+            window.location.href = 'transactions.html'; // Example action: redirect to transactions
+        }
+
+        function searchAction() {
+            // Action for search button, typically searching functionality would go here
+            alert("Searching books...");
+        }
+    </script>
+</body>
+</html>

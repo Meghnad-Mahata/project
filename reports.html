@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Reports</title>
+    <link rel="stylesheet" href="reports.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Available Reports</h1>
+
+        <div class="reports-options">
+            <a href="master-list-books.html" class="report-box">Master List of Books</a>
+            <a href="master-list-movies.html" class="report-box">Master List of Movies</a>
+            <a href="master-list-memberships.html" class="report-box">Master List of Memberships</a>
+            <a href="active-issues.html" class="report-box">Active Issues</a>
+            <a href="overdue-returns.html" class="report-box">Overdue Returns</a>
+            <a href="pending-issue-requests.html" class="report-box">Pending Issue Requests</a>
+        </div>
+
+        <!-- Home and Log Out buttons -->
+        <button class="home-btn" onclick="redirectHome()">Home</button>
+        <button class="logout-btn" onclick="logout()">Log Out</button>
+    </div>
+
+    <!-- JavaScript for navigation -->
+    <script>
+        function redirectHome() {
+            // Retrieve the user type from sessionStorage
+            const userType = sessionStorage.getItem('userType');
+
+            if (userType === 'admin') {
+                window.location.href = 'admin-dashboard.html'; // Admin home page
+            } else if (userType === 'user') {
+                window.location.href = 'user-dashboard.html'; // User home page
+            } else {
+                window.location.href = 'login.html'; // Default to login if no user type found
+            }
+        }
+
+        function logout() {
+            sessionStorage.clear(); // Clear session data
+            window.location.href = 'index.html'; // Redirect to login page
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master List of Books</title>
+    <link rel="stylesheet" href="master-list-books.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Overdue Returns</h1>
+
+        <!-- Sidebar for clickable options -->
+        <div class="sidebar">
+            <ul>
+                <li><a href="master-list-books.html">Master List of Books</a></li>
+                <li><a href="master-list-movies.html">Master List of Movies</a></li>
+                <li><a href="master-list-memberships.html">Master List of Memberships</a></li>
+                <li><a href="active-issues.html">Active Issues</a></li>
+                <li><a href="overdue-returns.html">Overdue Returns</a></li>
+                <li><a href="pending-issue-requests.html">Pending Issue Requests</a></li>
+            </ul>
+        </div>
+
+        <!-- Main content area -->
+        <div class="main-content">
+            <h2>Overdue Returns</h2>
+
+            <!-- Table for displaying books -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Serial No Book</th>
+                        <th>Name of Book</th>
+                        <th>Membership Id</th>
+                        <th>Date of Issue</th>
+                        <th>Date of Return</th>
+                        <th>Fine Calculations</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Back button -->
+            <button class="back-btn" onclick="goBack()">Back</button>
+        </div>
+
+        <!-- Home and Log Out buttons -->
+        <button class="home-btn" onclick="redirectHome()">Home</button>
+        <button class="logout-btn" onclick="logout()">Log Out</button>
+    </div>
+
+    <!-- JavaScript for navigation -->
+    <script>
+        function goBack() {
+            window.history.back(); // Go back to the previous page
+        }
+
+        function redirectHome() {
+            // Redirect to the user's home page (admin/user dashboard)
+            const userType = sessionStorage.getItem('userType');
+            if (userType === 'admin') {
+                window.location.href = 'admin-dashboard.html'; // Admin dashboard
+            } else {
+                window.location.href = 'user-dashboard.html'; // User dashboard
+            }
+        }
+
+        function logout() {
+            // Clear session and redirect to login page
+            sessionStorage.clear();
+            window.location.href = 'index.html'; // Redirect to login page
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Availability</title>
+    <link rel="stylesheet" href="book-availability.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Transactions - Book Availability</h1>
+
+        <table class="transaction-table">
+            <tr>
+                <th>Chart</th>
+                <th>Transactions</th>
+                <th>Home</th>
+            </tr>
+            <tr>
+                <td>Is book available?</td>
+                <td>
+                    <label for="bookName">Book Name:</label>
+                    <select id="bookName">
+                        <option value="" selected disabled>Select Book Name</option>
+                        <option value="book1">Book 1</option>
+                        <option value="book2">Book 2</option>
+                        <!-- Add more book options as needed -->
+                    </select>
+                </td>
+                <td rowspan="4">
+                    <button class="home-btn" onclick="redirectHome()">Home</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Issue book?</td>
+                <td>
+                    <label for="authorName">Author:</label>
+                    <select id="authorName">
+                        <option value="" selected disabled>Select Author</option>
+                        <option value="author1">Author 1</option>
+                        <option value="author2">Author 2</option>
+                        <!-- Add more author options as needed -->
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Return book?</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Pay Fine?</td>
+                <td></td>
+            </tr>
+        </table>
+
+        <div class="button-container">
+            <button class="back-btn" onclick="goBack()">Back</button>
+            <button class="search-btn" onclick="searchBooks()">Search</button>
+        </div>
+
+        <button class="logout-btn" onclick="logout()">Log Out</button>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back(); // Go back to the previous page
+        }
+
+        function redirectHome() {
+            const userType = sessionStorage.getItem('userType'); // Retrieve stored login type
+            if (userType === 'admin') {
+                window.location.href = 'admin-dashboard.html'; // Admin home page
+            } else {
+                window.location.href = 'user-dashboard.html'; // User home page
+            }
+        }
+
+        function logout() {
+            sessionStorage.clear(); // Clear session data
+            window.location.href = 'index.html'; // Redirect to login page
+        }
+
+        // Function to handle the "Search" button click
+        function searchBooks() {
+            const bookName = document.getElementById('bookName').value;
+            const authorName = document.getElementById('authorName').value;
+
+            if (!bookName || !authorName) {
+                alert("Please select both Book Name and Author.");
+                return;
+            }
+
+            // Navigate to the book availability results page, passing book and author in the URL
+            window.location.href = `transaction-results.html?book=${bookName}&author=${authorName}`;
+        }
+    </script>
+</body>
+</html>

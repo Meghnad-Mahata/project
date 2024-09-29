@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction - Library Management System</title>
+    <link rel="stylesheet" href="transactions.css">
+</head>
+<body>
+    <header>
+        <h1>Transaction</h1>
+        <nav>
+            <ul>
+                <li><a href="#" id="homeButton">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="transaction-options">
+            <div class="question-list">
+                <h2>Select an Option:</h2>
+                <ul>
+                    <li><a href="check-book-availability.html">Is book available?</a></li>
+                    <li><a href="issue-book.html">Issue book?</a></li>
+                    <li><a href="return-book.html">Return book?</a></li>
+                    <li><a href="pay-fine.html">Pay fine?</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <a href="index.html" id="logoutButton">Logout</a>
+        <p>&copy; 2024 Library Management System. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Home button functionality to take the user to the correct home page
+        document.getElementById('homeButton').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Retrieve the stored user type from sessionStorage
+            const userType = sessionStorage.getItem('userType'); 
+
+            if (userType === 'admin') {
+                window.location.href = 'admin-dashboard.html'; // Redirect to Admin Home
+            } else if (userType === 'user') {
+                window.location.href = 'user-dashboard.html'; // Redirect to User Home
+            } else {
+                // Default to login page if userType is not found (for safety)
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>

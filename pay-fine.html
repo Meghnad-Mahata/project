@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay Fine</title>
+    <link rel="stylesheet" href="pay-fine.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Transactions</h1>
+        
+        <!-- Sidebar for navigation -->
+        <div class="sidebar">
+            <ul>
+                <li><a href="#">Is Book Available?</a></li>
+                <li><a href="#">Issue Book</a></li>
+                <li><a href="#">Return Book</a></li>
+                <li><a href="#">Pay Fine</a></li>
+            </ul>
+        </div>
+
+        <!-- Main content area -->
+        <div class="main-content">
+            <h2>PAY FINE</h2>
+
+            <form id="payFineForm" onsubmit="return validateForm()">
+                <table>
+                    <tr>
+                        <td>Enter Book Name</td>
+                        <td>
+                            <select id="bookName" required>
+                                <option value="" selected disabled>Select Book</option>
+                                <option value="Book 1">Book 1</option>
+                                <option value="Book 2">Book 2</option>
+                                <!-- Add more book options as needed -->
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Enter Author</td>
+                        <td>
+                            <input type="text" id="authorName" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Serial Number</td>
+                        <td>
+                            <input type="text" id="serialNumber" required placeholder="Enter Serial Number">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Issue Date</td>
+                        <td>
+                            <input type="date" id="issueDate" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Return Date</td>
+                        <td>
+                            <input type="date" id="returnDate" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Actual Return Date</td>
+                        <td>
+                            <input type="date" id="actualReturnDate" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Fine Calculated</td>
+                        <td>
+                            <input type="text" id="fineCalculated" value="0" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Fine Paid</td>
+                        <td>
+                            <input type="checkbox" id="finePaid">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Remarks</td>
+                        <td>
+                            <textarea id="remarks" placeholder="Optional"></textarea>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- Button container -->
+                <div class="button-container">
+                    <button type="button" class="cancel-btn" onclick="cancelForm()">Cancel</button>
+                    <button type="submit" class="confirm-btn">Confirm</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Home and Log Out buttons -->
+        <button class="home-btn" onclick="redirectHome()">Home</button>
+        <button class="logout-btn" onclick="logout()">Log Out</button>
+    </div>
+
+    <!-- JavaScript for validation and button functions -->
+    <script>
+        document.getElementById('bookName').addEventListener('change', function() {
+            // Automatically populate author name based on book name selection
+            const bookToAuthorMap = {
+                'Book 1': 'Author 1',
+                'Book 2': 'Author 2'
+            };
+            const selectedBook = document.getElementById('bookName').value;
+            document.getElementById('authorName').value = bookToAuthorMap[selectedBook] || '';
+        });
+
+        function validateForm() {
+            const issueDate = new Date(document.getElementById('issueDate').value);
+            const today = new Date();
+
+            if (issueDate < today) {
+                alert("Issue Date cannot be lesser than today.");
+                return false;
+            }
+
+            if (!document.getElementById('serialNumber').value) {
+                alert("Serial number is required.");
+                return false;
+            }
+
+            return true;
+        }
+
+        function cancelForm() {
+            if (confirm("Are you sure you want to cancel?")) {
+                document.getElementById("payFineForm").reset();
+            }
+        }
+
+        function redirectHome() {
+            // Redirect to home page (user/admin dashboard)
+            window.location.href = 'user-dashboard.html'; // Change URL as needed
+        }
+
+        function logout() {
+            // Clear session and redirect to login page
+            sessionStorage.clear();
+            window.location.href = 'index.html'; // Change URL as needed
+        }
+    </script>
+</body>
+</html>

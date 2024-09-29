@@ -1,0 +1,119 @@
+/* Container for layout */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Sidebar styling */
+.sidebar {
+    float: left;
+    width: 20%;
+    background-color: #f9f9f9;
+    padding: 10px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+}
+
+.sidebar ul li a:hover {
+    background-color: #c0c0c0;
+}
+
+/* Main content area */
+.main-content {
+    float: left;
+    width: 75%;
+    padding: 20px;
+}
+
+.main-content h2 {
+    margin-bottom: 20px;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+select, input[type="text"], input[type="date"], textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+}
+
+/* Button container */
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Cancel button */
+.cancel-btn {
+    background-color: #f44336;
+}
+
+.cancel-btn:hover {
+    background-color: #e0312e;
+}
+
+/* Positioning Home and Logout buttons */
+.home-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.logout-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        float: none;
+    }
+
+    .main-content {
+        width: 100%;
+        float: none;
+    }
+}

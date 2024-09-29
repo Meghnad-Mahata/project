@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return Book</title>
+    <link rel="stylesheet" href="return-book.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Transactions</h1>
+        
+        <!-- Sidebar for navigation -->
+        <div class="sidebar">
+            <ul>
+                <li><a href="#">Is Book Available?</a></li>
+                <li><a href="#">Issue Book</a></li>
+                <li><a href="#">Return Book</a></li>
+                <li><a href="#">Pay Fine?</a></li>
+            </ul>
+        </div>
+
+        <!-- Main content area -->
+        <div class="main-content">
+            <h2>RETURN BOOK</h2>
+
+            <form id="returnBookForm" onsubmit="return validateForm()">
+                <table>
+                    <tr>
+                        <td>Enter Book Name</td>
+                        <td>
+                            <select id="bookName" required>
+                                <option value="" selected disabled>Select Book</option>
+                                <option value="Book 1">Book 1</option>
+                                <option value="Book 2">Book 2</option>
+                                <!-- Add more book options as needed -->
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Enter Author</td>
+                        <td>
+                            <input type="text" id="authorName" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Serial Number</td>
+                        <td>
+                            <input type="text" id="serialNumber" required placeholder="Enter Serial Number">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Issue Date</td>
+                        <td>
+                            <input type="date" id="issueDate" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Return Date</td>
+                        <td>
+                            <input type="date" id="returnDate" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Remarks</td>
+                        <td>
+                            <textarea id="remarks" placeholder="Optional"></textarea>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- Button container -->
+                <div class="button-container">
+                    <button type="button" class="cancel-btn" onclick="cancelForm()">Cancel</button>
+                    <button type="submit" class="confirm-btn">Confirm</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Home and Log Out buttons -->
+        <button class="home-btn" onclick="redirectHome()">Home</button>
+        <button class="logout-btn" onclick="logout()">Log Out</button>
+    </div>
+
+    <!-- JavaScript for validation and button functions -->
+    <script>
+        document.getElementById('bookName').addEventListener('change', function() {
+            // Automatically populate author name based on the selected book
+            const book = this.value;
+            const authorField = document.getElementById('authorName');
+            if (book === 'Book 1') {
+                authorField.value = 'Author 1';
+            } else if (book === 'Book 2') {
+                authorField.value = 'Author 2';
+            } else {
+                authorField.value = ''; // Default case if no match
+            }
+        });
+
+        function validateForm() {
+            const issueDate = document.getElementById('issueDate').value;
+            const returnDate = document.getElementById('returnDate').value;
+            const bookName = document.getElementById('bookName').value;
+            const serialNumber = document.getElementById('serialNumber').value;
+            const today = new Date().toISOString().split('T')[0];
+
+            if (!serialNumber) {
+                alert("Please enter the serial number.");
+                return false;
+            }
+
+            if (issueDate < today) {
+                alert("Issue date cannot be before today.");
+                return false;
+            }
+
+            if (!bookName) {
+                alert("Please select a book name.");
+                return false;
+            }
+
+            return true; // Allow form submission if all validations pass
+        }
+
+        function cancelForm() {
+            document.getElementById('returnBookForm').reset(); // Reset the form fields
+        }
+
+        function redirectHome() {
+            const userType = sessionStorage.getItem('userType'); // Retrieve stored login type
+            if (userType === 'admin') {
+                window.location.href = 'admin-dashboard.html'; // Admin home page
+            } else {
+                window.location.href = 'user-dashboard.html'; // User home page
+            }
+        }
+
+        function logout() {
+            sessionStorage.clear(); // Clear session data
+            window.location.href = 'index.html'; // Redirect to login page
+        }
+    </script>
+</body>
+</html>

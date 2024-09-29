@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Library Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login to Library Management</h1>
+
+        <form id="loginForm" onsubmit="login(); return false;">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="loginType">Login as:</label>
+                <select id="loginType" name="loginType" required>
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        // Function to handle login, store user type, and redirect
+        function login() {
+            // Get the login type (admin or user)
+            const loginType = document.getElementById('loginType').value;
+
+            // Example login logic, this would typically be validated against a backend
+            const isValidLogin = true; // Assume login validation passed for now
+            
+            if (isValidLogin) {
+                // Store the user type in sessionStorage
+                sessionStorage.setItem('userType', loginType);
+
+                // Redirect based on login type
+                if (loginType === 'admin') {
+                    window.location.href = 'admin-dashboard.html';
+                } else {
+                    window.location.href = 'user-dashboard.html';
+                }
+            } else {
+                alert('Invalid username or password.');
+            }
+        }
+    </script>
+</body>
+</html>
